@@ -6,10 +6,10 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created with IndexController
@@ -27,5 +27,14 @@ public class IndexController {
     public ResponseEntity<?> index(@PathVariable("id")long id){
         Account account = accountService.getAccountById(id);
         return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/newaccount",method = RequestMethod.POST)
+    public ResponseEntity<?> newaccount(@RequestBody @Valid Account account, BindingResult result){
+        if(result.hasErrors()){
+            return new ResponseEntity<> (result.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
+        account = accountService.newAccount(account);
+        return new ResponseEntity<>(account,HttpStatus.CREATED);
     }
 }

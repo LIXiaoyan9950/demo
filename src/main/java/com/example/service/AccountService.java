@@ -2,8 +2,8 @@ package com.example.service;
 
 import com.example.entity.Account;
 import com.example.jpa.AccountRepository;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,9 +14,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class AccountService {
-    private static final Logger logger = Logger.getLogger(AccountService.class);
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public Account getAccountByUserName(String name){
         return accountRepository.findByAccountName(name);
@@ -24,5 +25,10 @@ public class AccountService {
 
     public Account getAccountById(long id) {
         return accountRepository.findOne(id);
+    }
+
+    public Account newAccount(Account account) {
+        account.setPassword(passwordEncoder.encode(account.getNewpassword()));
+        return accountRepository.save(account);
     }
 }
