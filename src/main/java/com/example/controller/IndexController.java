@@ -4,12 +4,17 @@ import com.example.entity.Account;
 import com.example.service.AccountService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 /**
  * Created with IndexController
@@ -26,6 +31,10 @@ public class IndexController {
     @RequestMapping(value = "/index/{id}",method = RequestMethod.GET)
     public ResponseEntity<?> index(@PathVariable("id")long id){
         Account account = accountService.getAccountById(id);
+        List<Link> linkList = new ArrayList<>();
+        linkList.add(linkTo(IndexController.class).slash("accounts").withRel("principal"));
+        linkList.add(linkTo(IndexController.class).slash("account").slash(account.getAccountId()).withRel("accountId"));
+        account.add(linkList);
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 

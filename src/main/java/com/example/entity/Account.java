@@ -2,6 +2,7 @@ package com.example.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
 
@@ -13,10 +14,10 @@ import javax.persistence.*;
  */
 @Entity(name = "account")
 @Data
-public class Account {
+public class Account extends ResourceSupport{
     @Id
     @GeneratedValue
-    private long id;
+    private long accountId;
     @Column(unique=true)
     private String accountName;
     @JsonIgnore
@@ -25,4 +26,6 @@ public class Account {
     private String username;
     @Transient
     private String newpassword;
+
+
 }
