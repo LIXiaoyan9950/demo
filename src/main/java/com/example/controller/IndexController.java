@@ -37,4 +37,19 @@ public class IndexController {
         account = accountService.newAccount(account);
         return new ResponseEntity<>(account,HttpStatus.CREATED);
     }
+
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteId(@PathVariable("id")long id){
+        accountService.deleteAccount(id);
+        return new ResponseEntity<>(true,HttpStatus.NO_CONTENT);
+    }
+
+    @RequestMapping(value = "/updateAccount/{id}",method = RequestMethod.PUT)
+    public ResponseEntity<?> updateAccount(@RequestBody @Valid Account account, BindingResult result){
+        if(result.hasErrors()){
+            return new ResponseEntity<> (result.getAllErrors(), HttpStatus.BAD_REQUEST);
+        }
+        account = accountService.updateAccount(account);
+        return new ResponseEntity<>(account,HttpStatus.CREATED);
+    }
 }

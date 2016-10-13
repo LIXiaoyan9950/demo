@@ -31,4 +31,13 @@ public class AccountService {
         account.setPassword(passwordEncoder.encode(account.getNewpassword()));
         return accountRepository.save(account);
     }
+
+    public void deleteAccount(long id){
+        accountRepository.delete(id);
+    }
+
+    public Account updateAccount(Account account) {
+        account.setPassword(passwordEncoder.encode(account.getNewpassword()));
+        return accountRepository.save(account);
+    }
 }
