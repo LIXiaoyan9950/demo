@@ -38,7 +38,7 @@ public class IndexController {
         return new ResponseEntity<>(account, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/newaccount",method = RequestMethod.POST)
+    @RequestMapping(value = "/account/add",method = RequestMethod.POST)
     public ResponseEntity<?> newaccount(@RequestBody @Valid Account account, BindingResult result){
         if(result.hasErrors()){
             return new ResponseEntity<> (result.getAllErrors(), HttpStatus.BAD_REQUEST);

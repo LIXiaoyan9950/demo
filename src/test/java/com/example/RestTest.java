@@ -50,7 +50,7 @@ public class RestTest {
 //                .setPath("/index/1").build();
 //        ResponseEntity<Account> result = restTest.getRestTemplate().getForEntity(url, Account.class);
         Account account = new Account();
-        account.getAccountId();
+        account.setAccountId(11L);
         account.setAccountName("selena");
         account.setUsername("谷艳");
         account.setPassword("123456");
