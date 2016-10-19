@@ -10,3 +10,5 @@ npm install gulp-plumber
 npm install gulp-babel
 npm install main-bower-files
 npm install --save-dev grunt-wiredep
+
+//新建文件夹 bower_components
