@@ -1,3 +1,12 @@
 npm install gulp
 npm install gulp-load-plugins
 npm install browser-sync
+npm install del
+npm install wiredep
+npm install run-sequence
+npm install gulp-sourcemaps
+npm install gulp-autoprefixer
+npm install gulp-plumber
+npm install gulp-babel
+npm install main-bower-files
+npm install --save-dev grunt-wiredep
